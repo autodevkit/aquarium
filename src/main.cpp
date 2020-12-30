@@ -75,34 +75,34 @@ void setup()
   Serial.println(WiFi.localIP());
 
   //----------------------------------------------------SERVER
-  server.on("http://192.168.1.30:888/", HTTP_GET, [](AsyncWebServerRequest *request) {
+  server.on("https://autodevkit.netlify.app/data/", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/index.html", "text/html");
   });
 
-  server.on("http://192.168.1.30:888/w3.css", HTTP_GET, [](AsyncWebServerRequest *request) {
+  server.on("https://autodevkit.netlify.app/data/w3.css", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/w3.css", "text/css");
   });
 
-  server.on("http://192.168.1.30:888/script.js", HTTP_GET, [](AsyncWebServerRequest *request) {
+  server.on("https://autodevkit.netlify.app/data/script.js", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/script.js", "text/javascript");
   });
 
-  server.on("http://192.168.1.30:888/jquery-3.4.1.min.js", HTTP_GET, [](AsyncWebServerRequest *request) {
+  server.on("https://autodevkit.netlify.app/data/jquery-3.4.1.min.js", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/jquery-3.4.1.min.js", "text/javascript");
   });
 
-  server.on("http://192.168.1.30:888/lireLuminosite", HTTP_GET, [](AsyncWebServerRequest *request) {
+  server.on("https://autodevkit.netlify.app/data/lireLuminosite", HTTP_GET, [](AsyncWebServerRequest *request) {
     int val = analogRead(capteurLuminosite);
     String luminosite = String(val);
     request->send(200, "text/plain", luminosite);
   });
 
-  server.on("http://192.168.1.30:888/on", HTTP_GET, [](AsyncWebServerRequest *request) {
+  server.on("https://autodevkit.netlify.app/data/on", HTTP_GET, [](AsyncWebServerRequest *request) {
     etatLedVoulu = 1;
     request->send(204);
   });
 
-  server.on("http://192.168.1.30:888/off", HTTP_GET, [](AsyncWebServerRequest *request) {
+  server.on("https://autodevkit.netlify.app/data/off", HTTP_GET, [](AsyncWebServerRequest *request) {
     etatLedVoulu = 0;
     digitalWrite(led, LOW);
     etatLed = 0;
