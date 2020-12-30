@@ -78,7 +78,9 @@ void setup()
   //----------------------------------------------------SERVER
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
     //request->send(SPIFFS, "/index.html", "text/html");
-    request->send(200, "text/plain", "ok");
+    AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", "OK");
+    response->addHeader("Access-Control-Allow-Origin", "*");
+    request->send(response);
   });
   /*
   server.on("/w3.css", HTTP_GET, [](AsyncWebServerRequest *request) {
@@ -101,14 +103,20 @@ void setup()
 
   server.on("/on", HTTP_GET, [](AsyncWebServerRequest *request) {
     etatLedVoulu = 1;
-    request->send(204);
+    AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", "ON");
+    response->addHeader("Access-Control-Allow-Origin", "*");
+    request->send(response);
+    //request->send(204);
   });
 
   server.on("/off", HTTP_GET, [](AsyncWebServerRequest *request) {
     etatLedVoulu = 0;
     digitalWrite(led, LOW);
     etatLed = 0;
-    request->send(204);
+    AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", "OFF");
+    response->addHeader("Access-Control-Allow-Origin", "*");
+    request->send(response);
+    //request->send(204);
   });
 /*
   server.on("/delayLed", HTTP_POST, [](AsyncWebServerRequest *request) {
