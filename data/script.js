@@ -11,7 +11,7 @@
 
     function onButton() {
         var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "on", true);
+        xhttp.open("GET", "http://192.168.1.31/on", true);
         xhttp.send();
         
         r2.style.display = "initial"
@@ -20,7 +20,7 @@
     
     function offButton() {
         var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "off", true);
+        xhttp.open("GET", "http://192.168.1.31/off", true);
         xhttp.send();
         
         r1.style.display = "initial"

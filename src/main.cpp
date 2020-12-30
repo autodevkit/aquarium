@@ -26,6 +26,7 @@ void setup()
   digitalWrite(led, LOW);
   pinMode(capteurLuminosite, INPUT);
 
+/*
   //----------------------------------------------------SPIFFS
   if (!SPIFFS.begin())
   {
@@ -58,7 +59,7 @@ void setup()
     Serial.print("Total space used: ");
     Serial.print(usedBytes);
     Serial.println("byte");
-
+*/
   //----------------------------------------------------WIFI
   WiFi.begin(ssid, password);
   Serial.print("Tentative de connexion...");
@@ -75,40 +76,41 @@ void setup()
   Serial.println(WiFi.localIP());
 
   //----------------------------------------------------SERVER
-  server.on("https://autodevkit.netlify.app/data/", HTTP_GET, [](AsyncWebServerRequest *request) {
-    request->send(SPIFFS, "/index.html", "text/html");
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
+    //request->send(SPIFFS, "/index.html", "text/html");
+    request->send(200, "text/plain", "ok");
   });
-
-  server.on("https://autodevkit.netlify.app/data/w3.css", HTTP_GET, [](AsyncWebServerRequest *request) {
+  /*
+  server.on("/w3.css", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/w3.css", "text/css");
   });
 
-  server.on("https://autodevkit.netlify.app/data/script.js", HTTP_GET, [](AsyncWebServerRequest *request) {
+  server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/script.js", "text/javascript");
   });
 
-  server.on("https://autodevkit.netlify.app/data/jquery-3.4.1.min.js", HTTP_GET, [](AsyncWebServerRequest *request) {
+  server.on("/jquery-3.4.1.min.js", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/jquery-3.4.1.min.js", "text/javascript");
   });
 
-  server.on("https://autodevkit.netlify.app/data/lireLuminosite", HTTP_GET, [](AsyncWebServerRequest *request) {
+  server.on("/lireLuminosite", HTTP_GET, [](AsyncWebServerRequest *request) {
     int val = analogRead(capteurLuminosite);
     String luminosite = String(val);
     request->send(200, "text/plain", luminosite);
-  });
+  });*/
 
-  server.on("https://autodevkit.netlify.app/data/on", HTTP_GET, [](AsyncWebServerRequest *request) {
+  server.on("/on", HTTP_GET, [](AsyncWebServerRequest *request) {
     etatLedVoulu = 1;
     request->send(204);
   });
 
-  server.on("https://autodevkit.netlify.app/data/off", HTTP_GET, [](AsyncWebServerRequest *request) {
+  server.on("/off", HTTP_GET, [](AsyncWebServerRequest *request) {
     etatLedVoulu = 0;
     digitalWrite(led, LOW);
     etatLed = 0;
     request->send(204);
   });
-
+/*
   server.on("/delayLed", HTTP_POST, [](AsyncWebServerRequest *request) {
     if(request->hasParam("valeurDelayLed", true))
     {
@@ -118,7 +120,7 @@ void setup()
     }
     request->send(204);
   });
-
+*/
   server.begin();
   Serial.println("Serveur actif!");
 }
