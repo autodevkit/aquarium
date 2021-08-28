@@ -2,8 +2,8 @@
 pio device monitor -b 115200
 //mes mots de passe
 BODzlxIsJfqrvhNrFwqsQqlVaEefe2o7EMVPxF8W
-const char *ssid = "Livebox-EF3C";
-const char *password = "5FC2DC1221F679EC21C1592ECE";
+const char *ssid = ";
+const char *password = "";
 */
 //Required HTTPClientESP32Ex library to be installed  https://github.com/mobizt/HTTPClientESP32Ex
 
@@ -12,13 +12,13 @@ const char *password = "5FC2DC1221F679EC21C1592ECE";
 #include <NTPClient.h>
 
 
-#define FIREBASE_HOST "https://aquadevkit-default-rtdb.europe-west1.firebasedatabase.app/" //Change to your Firebase RTDB project ID e.g. Your_Project_ID.firebaseio.com
-#define FIREBASE_AUTH "NNwVE9jms6Q5OXGIBswAVX1tDNxlhokARofdFyA4" //Change to your Firebase RTDB secret password
+#define FIREBASE_HOST "firebasedatabase.app/" //Change to your Firebase RTDB project ID e.g. Your_Project_ID.firebaseio.com
+#define FIREBASE_AUTH "" //Change to your Firebase RTDB secret password
 
-#define WIFI_SSID "Bbox-C02AF1AE"
-#define WIFI_PASSWORD "7D2AAFD9CD9A211735161A69C7E2D1"
-//#define WIFI_SSID "Livebox-EF3C"
-//#define WIFI_PASSWORD "Aze6655448822"
+#define WIFI_SSID "Bbox-"
+#define WIFI_PASSWORD ""
+//#define WIFI_SSID "-EF3C"
+//#define WIFI_PASSWORD ""
 
 #include <RBDdimmer.h>
 
